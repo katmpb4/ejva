@@ -1,0 +1,54 @@
+<?php
+//Sortowanie szybkie (quickosort)
+//www.algorytm.org
+ 
+function quickSort($arr)
+{
+//jezeli argumentem jest tablica pusta lub jednoelementowa
+//to nie trzeba jej juz sortowac, zwroc ja od razu i zakoncz dzialanie
+if (count($arr) <= 1){
+return $arr;
+}
+ 
+$pivot = $arr[0];
+$smaller = [];
+$equal = [];
+$greater = [];
+ 
+//wrzuc do tablicy $smaller elementy mniejsze od elementu dzielacego $pivot
+foreach ($arr as $x) {
+if ($x < $pivot) {
+array_push($smaller, $x);
+}
+}
+ 
+//wrzuc do tablicy $equal elementy rowne elementowi dzielacemu $pivot
+foreach ($arr as $x) {
+if ($x == $pivot) {
+array_push($equal, $x);
+}
+}
+ 
+//wrzuc do tablicy $greater elementy wieksze od elementu dzielacego $pivot
+foreach ($arr as $x) {
+if ($x > $pivot) {
+array_push($greater, $x);
+}
+}
+ 
+//scal:
+//- wyniki sortowania tablicy elementow mniejszych,
+//- tablicy elementow rownych,
+// wyniku sortowania elementow wiekszych
+return array_merge(quickSort($smaller), $equal, quickSort($greater));
+}
+ 
+$tablica = array(16, 16, 4, 4, 10, 6, 14, 3, 15, 4, 4, 8, 1, 11, 12, 2, 19, 20, 7, 13, 5, 9, 1, 0, 18, 17);
+ 
+//sortuj tablice
+$sorted = quickSort($tablica);
+ 
+//wypisz wynik
+var_dump($sorted)
+ 
+?>
